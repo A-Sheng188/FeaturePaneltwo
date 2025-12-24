@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import FeaturePanel from './components/FeaturePanel/FeaturePanel';
+import { mockItems } from './components/FeaturePanel/mockItems';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const handleSelect = (item: any) => {
+    console.log('选择了:', item);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-4xl mx-auto">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">FeaturePanel 演示</h1>
+          <p className="text-gray-600 mt-2">这是一个可复用的功能面板组件</p>
+        </header>
+
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <FeaturePanel
+            items={mockItems}
+            onSelect={handleSelect}
+            className="h-[500px]"
+          />
+        </div>
+
+        <div className="mt-8 text-gray-600 text-sm">
+          <p>提示：尝试在搜索框输入关键词，或使用状态筛选功能</p>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
