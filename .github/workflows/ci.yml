@@ -1,0 +1,32 @@
+name: Auto Fix and Test
+
+on:
+      branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Check directory structure
+      run: |
+        if [ -d "src/src/src" ]; then
+          echo "发现错误的目录结构，正在修复..."
+          mv src/src/src/* src/ || true
+          rm -rf src/src/src || true
+        fi
+
+    - name: Run tests
+      run: npm test
